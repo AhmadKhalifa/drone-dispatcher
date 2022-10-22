@@ -1,5 +1,6 @@
 package com.drone.dispatcher.app.cucumber.def;
 
+import com.drone.dispatcher.app.cucumber.util.BaseStepDefs;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
@@ -7,7 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RegisterDroneStepDefs extends CommonDroneStepDefs {
+public class RegisterDroneStepDefs extends BaseStepDefs {
 
     @Given("configured max allowed serial number length is {int}")
     public void configuredMaxAllowedSerialNumberLengthIs(int configuredMaxAllowedSerialNumberLength) {

@@ -10,7 +10,6 @@ dependencies {
 
 	def springVersion = '5.3.9'
 	def springBootVersion = '2.7.5'
-	def junitVersion = '5.7.2'
 	def reactorVersion =  '3.4.24'
 
 	implementation "org.springframework:spring-context:${springVersion}"
@@ -20,10 +19,10 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
 	testImplementation "io.projectreactor:reactor-test:${reactorVersion}"
 
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testImplementation 'junit:junit:4.12'
+	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
 }
 
 test {

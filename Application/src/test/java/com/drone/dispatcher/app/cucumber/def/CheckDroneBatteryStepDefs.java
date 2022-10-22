@@ -1,10 +1,11 @@
 package com.drone.dispatcher.app.cucumber.def;
 
+import com.drone.dispatcher.app.cucumber.util.BaseStepDefs;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class CheckDroneBatteryStepDefs extends CommonDroneStepDefs {
+public class CheckDroneBatteryStepDefs extends BaseStepDefs {
 
     @When("user checks for battery level for drone {string}")
     public void userChecksForBatteryLevelForDrone(String droneId) {

@@ -1,17 +1,18 @@
 package com.drone.dispatcher.app.cucumber.util;
 
-import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
-@Component
-@AllArgsConstructor
 public class WebClient {
 
     private final WebTestClient webTestClient;
     private final ScenarioData scenarioData;
+
+    public WebClient(WebTestClient webTestClient, ScenarioData scenarioData) {
+        this.webTestClient = webTestClient;
+        this.scenarioData = scenarioData;
+    }
 
     public void get(String uri) {
         scenarioData.setResponseSpec(

@@ -20,13 +20,13 @@ repositories {
 
 dependencies {
 	def springVersion = '5.3.9'
+	def springBootVersion = '2.7.5'
 	def cucumberVersion = '6.6.0'
-	def junitVersion = '5.7.2'
 
 	implementation "org.springframework:spring-context:${springVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'name.nkonev.r2dbc-migrate:r2dbc-migrate-spring-boot-starter:2.7.7'
+	implementation "name.nkonev.r2dbc-migrate:r2dbc-migrate-spring-boot-starter:${springBootVersion}"
 	implementation 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
@@ -43,10 +43,10 @@ dependencies {
 	testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
 	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
 
-	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testImplementation 'junit:junit:4.12'
+	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
 }
 
-tasks.named('test') {
+tasks.withType(Test) {
 	useJUnitPlatform()
 }

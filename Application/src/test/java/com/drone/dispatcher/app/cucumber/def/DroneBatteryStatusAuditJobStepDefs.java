@@ -1,12 +1,13 @@
 package com.drone.dispatcher.app.cucumber.def;
 
+import com.drone.dispatcher.app.cucumber.util.BaseStepDefs;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class DroneBatteryStatusAuditJobStepDefs extends CommonDroneStepDefs {
+public class DroneBatteryStatusAuditJobStepDefs extends BaseStepDefs {
 
     @Given("current time is {string}")
     public void currentTimeIs(String currentTime) {
