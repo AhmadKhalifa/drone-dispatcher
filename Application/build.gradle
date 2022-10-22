@@ -19,10 +19,15 @@ repositories {
 }
 
 dependencies {
+	def springVersion = '5.3.9'
+	def cucumberVersion = '6.6.0'
+	def junitVersion = '5.7.2'
+
+	implementation "org.springframework:spring-context:${springVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'name.nkonev.r2dbc-migrate:r2dbc-migrate-spring-boot-starter:2.7.7'
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	runtimeOnly 'org.mariadb:r2dbc-mariadb'
@@ -32,6 +37,14 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	testRuntimeOnly 'com.h2database:h2'
 	testRuntimeOnly 'io.r2dbc:r2dbc-h2'
+
+	testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-core:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 tasks.named('test') {
