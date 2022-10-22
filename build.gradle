@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.drone.dispatcher'
+version = '1.0.0'
+sourceCompatibility = '11'
+
+allprojects {
+
+	def springBootVersion = '2.7.5'
+	project.ext {
+		springBootVersion = '2.7.5'
+	}
+	version '1.0.0'
+
+	repositories {
+		mavenCentral()
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}
+

@@ -1,0 +1,5 @@
+spring:
+  r2dbc:
+    url: r2dbc:mariadb://localhost:3306/drone_dispatcher
+    username: drone_dispatcher_user
+    password: password

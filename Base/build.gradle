@@ -1,0 +1,15 @@
+plugins {
+	id 'java'
+}
+
+group 'com.drone.dispatcher.base'
+version '1.0.0'
+
+dependencies {
+	def springVersion = '5.3.9'
+	def springBootVersion = '2.7.5'
+
+	implementation "org.springframework:spring-context:${springVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

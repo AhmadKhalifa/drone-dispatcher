@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  db:
+    image: "mariadb:latest"
+    ports:
+      - "3306:3306"
+    environment:
+      - "MARIADB_DATABASE=drone_dispatcher"
+      - "MARIADB_USER=drone_dispatcher_user"
+      - "MARIADB_ROOT_PASSWORD=password"
+      - "MARIADB_PASSWORD=password"
+    volumes:
+      - /var/lib/mysql/drone-dispatcher:/var/lib/mysql
+    networks:
+      - drone-dispatcher-network
+
+networks:
+  drone-dispatcher-network:
+    driver: bridge
