@@ -11,11 +11,11 @@ Feature: Check for carried medications for a specific drone
       | 6 | D6 | D-441-06      | CRUISER_WEIGHT | 350          | 84               | RETURNING  |
     And the following medications are registered
       | # | ID | Name              | Serial number    | Model          | Weight | Image ID |
-      | 1 | M1 | Aminophylline     | M-432-512-547-01 | LIGHT_WEIGHT   | 25     | I1       |
-      | 2 | M2 | Amyl              | M-432-512-547-02 | MIDDLE_WEIGHT  | 30     | I2       |
-      | 3 | M3 | Calcium Gluconate | M-432-512-547-03 | MIDDLE_WEIGHT  | 100    | I3       |
-      | 4 | M4 | Chlorpheniramine  | M-432-512-547-04 | CRUISER_WEIGHT | 40     | I4       |
-      | 5 | M5 | Digoxin           | M-432-512-547-05 | HEAVY_WEIGHT   | 120    | I5       |
+      | 1 | M1 | Aminophylline     | M_432_512_547_01 | LIGHT_WEIGHT   | 25     | I1       |
+      | 2 | M2 | Amyl              | M_432_512_547_02 | MIDDLE_WEIGHT  | 30     | I2       |
+      | 3 | M3 | Calcium Gluconate | M_432_512_547_03 | MIDDLE_WEIGHT  | 100    | I3       |
+      | 4 | M4 | Chlorpheniramine  | M_432_512_547_04 | CRUISER_WEIGHT | 40     | I4       |
+      | 5 | M5 | Digoxin           | M_432_512_547_05 | HEAVY_WEIGHT   | 120    | I5       |
 
 
   Scenario: 1. Check for carried medications for an existing drone (loaded drone, one medication)
@@ -36,9 +36,9 @@ Feature: Check for carried medications for a specific drone
     When user checks for medications carried by drone "D4"
     Then the following medication(s) should return
       | # | ID | Name              | Serial number    | Model         | Weight | Image ID |
-      | 1 | M1 | Aminophylline     | M-432-512-547-01 | LIGHT_WEIGHT  | 25     | I1       |
-      | 2 | M2 | Amyl              | M-432-512-547-02 | MIDDLE_WEIGHT | 30     | I2       |
-      | 3 | M3 | Calcium Gluconate | M-432-512-547-03 | MIDDLE_WEIGHT | 100    | I3       |
+      | 1 | M1 | Aminophylline     | M_432_512_547_01 | LIGHT_WEIGHT  | 25     | I1       |
+      | 2 | M2 | Amyl              | M_432_512_547_02 | MIDDLE_WEIGHT | 30     | I2       |
+      | 3 | M3 | Calcium Gluconate | M_432_512_547_03 | MIDDLE_WEIGHT | 100    | I3       |
 
   Scenario: 3. Check for carried medications for an existing drone (idle drone)
     When user checks for medications carried by drone "D1"

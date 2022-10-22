@@ -5,3 +5,6 @@ spring:
     web-application-type: reactive
   liquibase:
     change-log: classpath:db/changelog-master.yaml
+application:
+  validations:
+    minBatteryCapacity: 25

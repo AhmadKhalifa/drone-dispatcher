@@ -1,6 +1,6 @@
-Feature: Check for battery level for a specific drone
+Feature: Check for battery capacity for a specific drone
 
-  Scenario Outline: 1. Check for battery level for an existing drone
+  Scenario Outline: 1. Check for battery capacity for an existing drone
     Given the following drones are registered
       | # | ID | Serial number | Model          | Weight limit | Battery capacity     | State      |
       | 1 | D1 | D-441-01      | LIGHT_WEIGHT   | 100          | 94                   | IDLE       |
@@ -19,7 +19,7 @@ Feature: Check for battery level for a specific drone
       | 99                 |
       | 100                |
 
-  Scenario: 2. Check for battery level for a non-existing drone
+  Scenario: 2. Check for battery capacity for a non-existing drone
     Given the following drones are registered
       | # | ID | Serial number | Model          | Weight limit | Battery capacity | State      |
       | 1 | D1 | D-441-01      | LIGHT_WEIGHT   | 100          | 94               | IDLE       |

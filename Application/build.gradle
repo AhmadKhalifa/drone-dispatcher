@@ -19,6 +19,12 @@ repositories {
 }
 
 dependencies {
+
+
+	implementation project (":Base")
+	implementation project (":Domain")
+	implementation project (":Gateway")
+
 	def springVersion = '5.3.9'
 	def springBootVersion = '2.7.5'
 	def cucumberVersion = '6.6.0'

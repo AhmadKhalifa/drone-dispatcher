@@ -1,9 +1,9 @@
 INSERT INTO `medications`
-VALUES (UUID(), 'Aminophylline', 'M-432-512-547-01', 20, UUID()),
-       (UUID(), 'Amphetamine sulfate', 'M-432-512-547-02', 30, UUID()),
-       (UUID(), 'Amyl nitrite inhalation', 'M-432-512-547-03', 25, UUID()),
-       (UUID(), 'Atropine sulfate', 'M-432-512-547-04', 100, UUID()),
-       (UUID(), 'Caffeine sodium benzoate', 'M-432-512-547-05', 300, UUID()),
-       (UUID(), 'Calcium Gluconate', 'M-432-512-547-06', 500, UUID()),
-       (UUID(), 'Chlorpheniramine', 'M-432-512-547-07', 250, UUID()),
-       (UUID(), 'Digoxin', 'M-432-512-547-08', 50, UUID());
+VALUES (UUID(), 'Aminophylline', 'M_432_512_547_01', 20, UUID()),
+       (UUID(), 'Amphetamine sulfate', 'M_432_512_547_02', 30, UUID()),
+       (UUID(), 'Amyl nitrite inhalation', 'M_432_512_547_03', 25, UUID()),
+       (UUID(), 'Atropine sulfate', 'M_432_512_547_04', 100, UUID()),
+       (UUID(), 'Caffeine sodium benzoate', 'M_432_512_547_05', 45, UUID()),
+       (UUID(), 'Calcium Gluconate', 'M_432_512_547_06', 100, UUID()),
+       (UUID(), 'Chlorpheniramine', 'M_432_512_547_07', 250, UUID()),
+       (UUID(), 'Digoxin', 'M_432_512_547_08', 50, UUID());
