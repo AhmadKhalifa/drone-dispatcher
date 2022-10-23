@@ -16,6 +16,7 @@ import com.drone.dispatcher.medication.repository.MedicationRepository;
 import com.drone.dispatcher.medication.validator.MedicationExistsValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
@@ -36,6 +37,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
     private final DroneMapper droneMapper;
 
     @Override
+    @Transactional
     public Mono<DroneDto> apply(MedicationCarryRequest parameters) {
         return Mono
                 .justOrEmpty(parameters)
