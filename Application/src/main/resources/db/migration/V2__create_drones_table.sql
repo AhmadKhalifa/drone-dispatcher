@@ -1,11 +1,12 @@
 CREATE TABLE IF NOT EXISTS `drones`
 (
-    `uuid`             VARCHAR(64) PRIMARY KEY                                                   NOT NULL,
+    `id`               INT AUTO_INCREMENT PRIMARY KEY,
+    `uuid`             VARCHAR(64) UNIQUE                                                        NOT NULL,
     `serial_number`    VARCHAR(100) UNIQUE                                                       NOT NULL,
-    `weight_limit`     INT                                                                   NOT NULL,
-    `battery_capacity` INT                                                                   NOT NULL DEFAULT 100,
+    `weight_limit`     INT                                                                       NOT NULL,
+    `battery_capacity` INT                                                                       NOT NULL DEFAULT 100,
     `medication_uuid`  VARCHAR(64)                                                               NULL,
-    `model`            ENUM ('LIGHT_WEIGHT','MIDDLE_WEIGHT', 'CRUISER_WEIGHT', 'HEAVY_WEIGHT')   NOT NULL,
-    `state`            ENUM ('IDLE','LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING') NOT NULL DEFAULT 'IDLE',
+    `model`            VARCHAR(64) NOT NULL,
+    `state`            VARCHAR(64) NOT NULL DEFAULT 'IDLE',
     FOREIGN KEY (`medication_uuid`) REFERENCES `medications` (`uuid`)
 );

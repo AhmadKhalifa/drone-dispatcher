@@ -1,59 +1,49 @@
 Feature: Register a new medication
 
   Background:
-    Given configured max allowed serial number length is 10
-    And configured max allowed drone weight is 500 grams
-    And the following drones are registered
-      | # | ID | Serial number | Model          | Weight limit | Battery capacity | State      |
-      | 1 | D1 | D-441-01      | LIGHT_WEIGHT   | 100          | 94               | IDLE       |
-      | 2 | D2 | D-441-02      | MIDDLE_WEIGHT  | 200          | 21               | LOADING    |
-      | 3 | D3 | D-441-03      | MIDDLE_WEIGHT  | 300          | 52               | LOADED     |
-      | 4 | D4 | D-441-04      | CRUISER_WEIGHT | 400          | 12               | DELIVERING |
-      | 5 | D5 | D-441-05      | HEAVY_WEIGHT   | 500          | 60               | DELIVERED  |
-      | 6 | D6 | D-441-06      | CRUISER_WEIGHT | 350          | 84               | RETURNING  |
-
-  Scenario: 1. Register a new drone with a unique and valid serial number
-    When user registers a new drone with the following details
-      | Serial number | Model        | Weight limit |
-      | D-441-7       | LIGHT_WEIGHT | 150          |
-    Then drone is registered successfully with serial number "D-441-7"
+    Given configured medication name regex is "([A-Za-z0-9\-\_]+)"
+    And configured medication code regex is "([A-Z0-9\_]+)"
+    And the following medications are registered
+      | # | ID | Name              | Code             | Weight | Image ID |
+      | 1 | M1 | Aminophylline     | M_432_512_547_01 | 25     | I1       |
+      | 2 | M2 | Amyl              | M_432_512_547_02 | 30     | I2       |
+      | 3 | M3 | Calcium-Gluconate | M_432_512_547_03 | 100    | I3       |
+      | 4 | M4 | Chlorpheniramine  | M_432_512_547_04 | 40     | I4       |
+      | 5 | M5 | Digoxin           | M_432_512_547_05 | 120    | I5       |
 
 
-  Scenario: 2. Register a new drone with a unique but not valid serial number (length > max configured)
-    When user registers a new drone with the following details
-      | Serial number | Model        | Weight limit |
-      | D-441-39123-7 | LIGHT_WEIGHT | 150          |
-    Then an error is returned with status code 400 with a message "Drone serial number is too long"
+  Scenario: 1. Register a new medication with a unique and valid code
+    When user registers a new medication with the following details
+      | Name                | Code             | Weight | Image ID |
+      | Amphetamine-sulfate | M_432_512_547_06 | 150    | I6       |
+    Then medication is registered successfully with code "M_432_512_547_06"
 
 
-  Scenario: 3. Register a new drone with a valid but non-unique serial number
-    When user registers a new drone with the following details
-      | Serial number | Model        | Weight limit |
-      | D-441-7       | LIGHT_WEIGHT | 150          |
-    Then an error is returned with status code 409 with a message "Drone already registered with this serial number"
-
-
-  Scenario: 4. Register a new drone with an invalid model
-    When user registers a new drone with the following details
-      | Serial number | Model       | Weight limit |
-      | D-441-7       | PHOTOGRAPHY | 150          |
-    Then an error is returned with status code 400 with a message "Invalid drone model"
-
-
-  Scenario: 5. Register a new drone with an invalid weight limit (weight > max configured)
-    When user registers a new drone with the following details
-      | Serial number | Model        | Weight limit |
-      | D-441-7       | HEAVY_WEIGHT | 600          |
-    Then an error is returned with status code 400 with a message "Drone max weight is more than max allowed"
-
-
-  Scenario Outline: 6. Register a new drone with an invalid weight limit (weight < 1)
-    When user registers a new drone with the following details
-      | Serial number | Model        | Weight limit         |
-      | D-441-7       | LIGHT_WEIGHT | <Drone weight limit> |
-    Then an error is returned with status code 400 with a message "Drone max weight can't be zero or negative"
+  Scenario Outline: 2. Register a new medication with a unique but invalid code
+    When user registers a new medication with the following details
+      | Name                | Code              | Weight | Image ID |
+      | Amphetamine-sulfate | <Medication code> | 150    | I6       |
+    Then an error is returned with status code 400 with a message "Invalid medication code"
     Examples:
-      | Drone weight limit |
-      | 0                  |
-      | -1                 |
-      | -10                |
+      | Medication code |
+      | Code_1234       |
+      | CODE-1234       |
+      | code-1234       |
+
+
+  Scenario Outline: 3. Register a new drone with invalid name
+    When user registers a new medication with the following details
+      | Name              | Code             | Weight | Image ID |
+      | <Medication name> | M_432_512_547_06 | 150    | I6       |
+    Then an error is returned with status code 400 with a message "Invalid medication name"
+    Examples:
+      | Medication name |
+      | Any name        |
+      | @ny-name        |
+
+
+  Scenario: 4. Register a new drone with an existing code
+    When user registers a new medication with the following details
+      | Name                | Code             | Weight | Image ID |
+      | Amphetamine sulfate | M_432_512_547_03 | 150    | I6       |
+    Then an error is returned with status code 409 with a message "Medication already registered with this code"

@@ -1,8 +1,8 @@
 package com.drone.dispatcher.domain.drone.mapper;
 
+import com.drone.dispatcher.domain.drone.dto.DroneDto;
 import com.drone.dispatcher.domain.drone.dto.DroneRegistrationDto;
 import com.drone.dispatcher.domain.drone.model.Drone;
-import com.drone.dispatcher.domain.drone.model.DroneDto;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -17,7 +17,7 @@ public class DroneMapper {
                 .serialNumber(droneDto.getSerialNumber())
                 .weightLimit(droneDto.getWeightLimit())
                 .batteryCapacity(100)
-                .model(droneDto.getModel())
+                .model(Drone.Model.valueOf(droneDto.getModel()))
                 .state(Drone.State.IDLE)
                 .build();
     }

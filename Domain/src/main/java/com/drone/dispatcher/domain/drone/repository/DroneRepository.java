@@ -7,7 +7,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface DroneRepository extends ReactiveCrudRepository<Drone, String> {
+public interface DroneRepository extends ReactiveCrudRepository<Drone, Long> {
+
+    Mono<Drone> findByUuid(String uuid);
+
+    @SuppressWarnings("SpringDataRepositoryMethodReturnTypeInspection")
+    Mono<Boolean> existsByUuid(String uuid);
 
     Flux<Drone> findAllByState(Drone.State state);
 

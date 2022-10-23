@@ -1,9 +1,9 @@
 package com.drone.dispatcher.domain.medication.usecase;
 
-import com.drone.dispatcher.base.MonoUseCase;
+import com.drone.dispatcher.domain.base.MonoUseCase;
+import com.drone.dispatcher.domain.drone.dto.DroneDto;
 import com.drone.dispatcher.domain.drone.mapper.DroneMapper;
 import com.drone.dispatcher.domain.drone.model.Drone;
-import com.drone.dispatcher.domain.drone.model.DroneDto;
 import com.drone.dispatcher.domain.drone.repository.DroneRepository;
 import com.drone.dispatcher.domain.drone.validator.DroneCanHandleWeightValidator;
 import com.drone.dispatcher.domain.drone.validator.DroneExistsValidator;
@@ -47,7 +47,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
                         Flux
                                 .just(requestedMedication.getMedicationUuid())
                                 .flatMap(medicationExistsValidator::validate)
-                                .flatMap(medicationRepository::findById)
+                                .flatMap(medicationRepository::findByUuid)
                                 .map(medication -> Tuples.of(
                                         medication, parameters.getDroneUuid(), requestedMedication.getQuantity()
                                 ))
@@ -61,7 +61,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
                                 .zipWith(Mono.just(parameters.getDroneUuid()))
                                 .flatMap(droneCanHandleWeightValidator::validate)
                                 .map(Tuple2::getT2)
-                                .flatMap(droneRepository::findById)
+                                .flatMap(droneRepository::findByUuid)
                                 .map(Drone::markAsLoading)
                                 .flatMap(droneRepository::save)
                                 .map(__ -> carriedMedications)
@@ -70,7 +70,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
                 .flatMapMany(carriedMedicationRepository::saveAll)
                 .collectList()
                 .map(__ -> parameters.getDroneUuid())
-                .flatMap(droneRepository::findById)
+                .flatMap(droneRepository::findByUuid)
                 .map(Drone::markAsLoaded)
                 .flatMap(droneRepository::save)
                 .map(droneMapper::toDto);

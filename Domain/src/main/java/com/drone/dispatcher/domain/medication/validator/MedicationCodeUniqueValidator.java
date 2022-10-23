@@ -1,7 +1,7 @@
 package com.drone.dispatcher.domain.medication.validator;
 
-import com.drone.dispatcher.base.Validator;
-import com.drone.dispatcher.base.exception.NotFoundException;
+import com.drone.dispatcher.domain.base.Validator;
+import com.drone.dispatcher.domain.exception.ConflictException;
 import com.drone.dispatcher.domain.medication.dto.MedicationRegistrationDto;
 import com.drone.dispatcher.domain.medication.repository.MedicationRepository;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @AllArgsConstructor
-public class MedicationCodeUniqueValidator extends Validator<MedicationRegistrationDto, NotFoundException> {
+public class MedicationCodeUniqueValidator extends Validator<MedicationRegistrationDto, ConflictException> {
 
     private final MedicationRepository medicationRepository;
 
@@ -23,7 +23,7 @@ public class MedicationCodeUniqueValidator extends Validator<MedicationRegistrat
     }
 
     @Override
-    protected NotFoundException getException(MedicationRegistrationDto parameter) {
-        return new NotFoundException("Medication already registered with this code");
+    protected ConflictException getException(MedicationRegistrationDto parameter) {
+        return new ConflictException("Medication already registered with this code");
     }
 }

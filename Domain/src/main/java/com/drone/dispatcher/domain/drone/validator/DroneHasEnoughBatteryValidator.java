@@ -1,9 +1,9 @@
 package com.drone.dispatcher.domain.drone.validator;
 
-import com.drone.dispatcher.base.Validator;
-import com.drone.dispatcher.base.exception.ValidationException;
+import com.drone.dispatcher.domain.base.Validator;
 import com.drone.dispatcher.domain.drone.model.Drone;
 import com.drone.dispatcher.domain.drone.repository.DroneRepository;
+import com.drone.dispatcher.domain.exception.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class DroneHasEnoughBatteryValidator extends Validator<String, Validation
     @Override
     protected Mono<Boolean> isValid(String parameter) {
         return droneRepository
-                .findById(parameter)
+                .findByUuid(parameter)
                 .map(Drone::getBatteryCapacity)
                 .map(batteryCapacity -> batteryCapacity >= minBatteryCapacity);
     }

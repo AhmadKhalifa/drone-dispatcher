@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class CarriedMedication {
 
     @Id
+    private Long id;
     private String uuid;
     private String droneUuid;
     private String medicationUuid;

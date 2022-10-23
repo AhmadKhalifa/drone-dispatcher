@@ -1,4 +1,4 @@
-package com.drone.dispatcher.base.exception;
+package com.drone.dispatcher.domain.exception;
 
 import org.springframework.http.HttpStatus;
 

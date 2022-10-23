@@ -1,7 +1,7 @@
-package com.drone.dispatcher.base;
+package com.drone.dispatcher.domain.base;
 
-import com.drone.dispatcher.base.exception.IntervalServerErrorException;
-import com.drone.dispatcher.base.exception.StatusException;
+import com.drone.dispatcher.domain.exception.IntervalServerErrorException;
+import com.drone.dispatcher.domain.exception.StatusException;
 import reactor.core.publisher.Mono;
 
 public abstract class Validator<T, S extends StatusException> {

@@ -1,7 +1,7 @@
 package com.drone.dispatcher.domain.medication.validator;
 
-import com.drone.dispatcher.base.Validator;
-import com.drone.dispatcher.base.exception.NotFoundException;
+import com.drone.dispatcher.domain.base.Validator;
+import com.drone.dispatcher.domain.exception.NotFoundException;
 import com.drone.dispatcher.domain.medication.repository.MedicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class MedicationExistsValidator extends Validator<String, NotFoundExcepti
 
     @Override
     protected Mono<Boolean> isValid(String parameter) {
-        return medicationRepository.existsById(parameter);
+        return medicationRepository.existsByUuid(parameter);
     }
 
     @Override

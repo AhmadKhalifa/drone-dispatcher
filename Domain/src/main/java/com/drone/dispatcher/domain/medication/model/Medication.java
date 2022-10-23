@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Medication {
 
     @Id
+    private Long id;
     private String uuid;
     private String name;
     private String code;

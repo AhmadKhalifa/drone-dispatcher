@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 @Repository
-public interface CarriedMedicationRepository extends ReactiveCrudRepository<CarriedMedication, String> {
+public interface CarriedMedicationRepository extends ReactiveCrudRepository<CarriedMedication, Long> {
 
     Flux<CarriedMedication> findAllByDroneUuid(String droneUuid);
 }

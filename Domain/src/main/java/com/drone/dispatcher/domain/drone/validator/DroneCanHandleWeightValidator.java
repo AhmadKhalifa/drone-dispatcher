@@ -1,9 +1,9 @@
 package com.drone.dispatcher.domain.drone.validator;
 
-import com.drone.dispatcher.base.Validator;
-import com.drone.dispatcher.base.exception.ValidationException;
+import com.drone.dispatcher.domain.base.Validator;
 import com.drone.dispatcher.domain.drone.model.Drone;
 import com.drone.dispatcher.domain.drone.repository.DroneRepository;
+import com.drone.dispatcher.domain.exception.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -18,7 +18,7 @@ public class DroneCanHandleWeightValidator extends Validator<Tuple2<Integer, Str
     @Override
     protected Mono<Boolean> isValid(Tuple2<Integer, String> parameter) {
         return droneRepository
-                .findById(parameter.getT2())
+                .findByUuid(parameter.getT2())
                 .map(Drone::getWeightLimit)
                 .map(droneWeightLimit -> droneWeightLimit >= parameter.getT1());
     }

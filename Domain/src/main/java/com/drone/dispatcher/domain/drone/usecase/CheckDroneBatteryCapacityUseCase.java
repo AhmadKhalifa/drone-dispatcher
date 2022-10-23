@@ -1,7 +1,7 @@
-package com.drone.dispatcher.domain.logging.usecase;
+package com.drone.dispatcher.domain.drone.usecase;
 
-import com.drone.dispatcher.base.MonoUseCase;
-import com.drone.dispatcher.domain.logging.dto.BatteryCapacityDto;
+import com.drone.dispatcher.domain.base.MonoUseCase;
+import com.drone.dispatcher.domain.drone.dto.BatteryCapacityDto;
 import com.drone.dispatcher.domain.drone.model.Drone;
 import com.drone.dispatcher.domain.drone.repository.DroneRepository;
 import com.drone.dispatcher.domain.drone.validator.DroneExistsValidator;
@@ -21,7 +21,7 @@ public class CheckDroneBatteryCapacityUseCase implements MonoUseCase<String, Bat
         return Mono
                 .justOrEmpty(parameters)
                 .flatMap(droneExistsValidator::validate)
-                .flatMap(droneRepository::findById)
+                .flatMap(droneRepository::findByUuid)
                 .map(Drone::getBatteryCapacity)
                 .map(BatteryCapacityDto::new);
     }

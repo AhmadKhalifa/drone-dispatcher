@@ -20,10 +20,7 @@ repositories {
 
 dependencies {
 
-
-	implementation project (":Base")
 	implementation project (":Domain")
-	implementation project (":Gateway")
 
 	def springVersion = '5.3.9'
 	def springBootVersion = '2.7.5'

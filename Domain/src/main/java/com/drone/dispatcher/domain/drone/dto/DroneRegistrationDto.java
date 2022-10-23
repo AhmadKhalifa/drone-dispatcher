@@ -1,13 +1,16 @@
 package com.drone.dispatcher.domain.drone.dto;
 
-import com.drone.dispatcher.domain.drone.model.Drone;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DroneRegistrationDto {
     private String serialNumber;
     private int weightLimit;
-    private Drone.Model model;
+    private String model;
 }

@@ -8,3 +8,10 @@ spring:
 application:
   validations:
     minBatteryCapacity: 25
+    maxDroneWeightLimit: 500
+    maxDroneSerialNumberLength: 100
+    medicationNameRegex: '([A-Za-z0-9\-\_]+)'
+    medicationCodeRegex: '([A-Z0-9\_]+)'
+  jobs:
+    DroneBatteryAuditJob:
+      cronExpression: "0 * 0 ? * *"

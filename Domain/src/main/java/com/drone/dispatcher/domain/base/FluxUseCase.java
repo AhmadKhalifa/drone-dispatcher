@@ -1,4 +1,4 @@
-package com.drone.dispatcher.base;
+package com.drone.dispatcher.domain.base;
 
 import reactor.core.publisher.Flux;
 

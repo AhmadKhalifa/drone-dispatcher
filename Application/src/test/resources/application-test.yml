@@ -3,3 +3,15 @@ spring:
     url: r2dbc:h2:mem:///~/db/drone_dispatcher
     username: sa
     password:
+  main:
+    allow-bean-definition-overriding: true
+application:
+  validations:
+    minBatteryCapacity: 25
+    maxDroneWeightLimit: 500
+    maxDroneSerialNumberLength: 10
+    medicationNameRegex: '([A-Za-z0-9\-\_]+)'
+    medicationCodeRegex: '([A-Z0-9\_]+)'
+  jobs:
+    DroneBatteryAuditJob:
+      cronExpression: "0 0 0 ? * *"

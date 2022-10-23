@@ -1,16 +1,16 @@
 package com.drone.dispatcher.domain.drone.validator;
 
-import com.drone.dispatcher.base.Validator;
-import com.drone.dispatcher.base.exception.NotFoundException;
+import com.drone.dispatcher.domain.base.Validator;
 import com.drone.dispatcher.domain.drone.dto.DroneRegistrationDto;
 import com.drone.dispatcher.domain.drone.repository.DroneRepository;
+import com.drone.dispatcher.domain.exception.ConflictException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
 @AllArgsConstructor
-public class DroneSerialNumberUniqueValidator extends Validator<DroneRegistrationDto, NotFoundException> {
+public class DroneSerialNumberUniqueValidator extends Validator<DroneRegistrationDto, ConflictException> {
 
     private final DroneRepository droneRepository;
 
@@ -23,7 +23,7 @@ public class DroneSerialNumberUniqueValidator extends Validator<DroneRegistratio
     }
 
     @Override
-    protected NotFoundException getException(DroneRegistrationDto parameter) {
-        return new NotFoundException("Drone already registered with this serial number");
+    protected ConflictException getException(DroneRegistrationDto parameter) {
+        return new ConflictException("Drone already registered with this serial number");
     }
 }

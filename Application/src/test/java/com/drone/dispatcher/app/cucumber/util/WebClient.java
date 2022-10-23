@@ -33,4 +33,10 @@ public class WebClient {
                         .exchange()
         );
     }
+    public WebTestClient.ResponseSpec responseBody(int expectedStatusCode) {
+        return scenarioData
+                .get(ScenarioData.Keys.RESPONSE_SPEC, WebTestClient.ResponseSpec.class)
+                .expectStatus()
+                .isEqualTo(expectedStatusCode);
+    }
 }

@@ -5,12 +5,16 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 @Data
 @Builder
 @Table("drones")
 public class Drone {
 
     @Id
+    private Long id;
     private String uuid;
     private String serialNumber;
     private int weightLimit;
@@ -19,7 +23,11 @@ public class Drone {
     private State state;
 
     public enum Model {
-        LIGHT_WEIGHT, MIDDLE_WEIGHT, CRUISER_WEIGHT, HEAVY_WEIGHT
+        LIGHT_WEIGHT, MIDDLE_WEIGHT, CRUISER_WEIGHT, HEAVY_WEIGHT;
+
+        public static boolean isValidModel(String model) {
+            return Arrays.stream(values()).map(Objects::toString).anyMatch(model::equals);
+        }
     }
 
     public enum State {

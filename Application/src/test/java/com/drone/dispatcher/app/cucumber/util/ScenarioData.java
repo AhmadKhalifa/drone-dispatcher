@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -42,5 +43,10 @@ public class ScenarioData {
 
     interface Keys {
         String RESPONSE_SPEC = "RESPONSE_SPEC";
+    }
+
+    public String uuidOf(String id) {
+        scenarioCache.putIfAbsent(id, UUID.randomUUID().toString());
+        return get(id, String.class);
     }
 }
