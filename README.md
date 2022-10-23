@@ -9,6 +9,17 @@ The service requires a running `MariaDB` server. To start your own, please run t
 sudo docker-compose up
 ```
 Tests run on `H2DB` which doesn't require any database containers running.
+
+## BDD 
+Behavioural-driven development was followed while implementing this system. Please check the following feature files to get familiar with its business
+* [Check available drones](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/drone/CheckAvailableDrones.feature)
+* [Check battery capacity](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/drone/CheckDroneBatteryCapacity.feature)
+* [Register a new drone](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/drone/RegisterDrone.feature)
+* [Drone battery status audit job](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/logging/DroneBatteryStatusAuditJob.feature)
+* [Check drone medications](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/medication/CheckDroneMedications.feature)
+* [Load medications on a drone](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/medication/LoadDroneWithMedications.feature)
+* [Register a new medication](https://github.com/AhmadKhalifa/drone-dispatcher/blob/master/src/test/resources/features/medication/RegisterMedication.feature)
+
 ## Usage
 To build the application
 ```bash
