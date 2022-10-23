@@ -1,17 +1,69 @@
 # Drone dispatcher
+A reactive drone fleet dispatching system implemented in Java
 
-### Getting started document
-To get started, please consider the following notes:
+## Database initialization
 
-* Initialize MariaDB by running docker-compose `sudo docker-compose up`
-* Application class is found in Application module `com.drone.dispatcher.application.DroneDispatcherApplication.java`
-* Necessary migrations and seeding are done automatically using a migration library
-* Development code is using `MariaDB` using profile `local-development`
-* Testing code is using `H2DB` using profile `test`
-* Application is following clean architecture with modules:
-  * `Base` which contains all base code used by all the other modules
-  * `Domain` which contains the business logic regardless of any data layer implementation
-  * `Data` which contains the actual data layer implementation
-  * `Gateway` which contains all the logic of handling outer-world interactions (e.g. controllers)
-  * `Application` which contains app-specific code and configuration, in addition to app integration tests
-* All modules have their own unit tests except for `Application` modules which contains all integration tests for all modules as a whole
+The service requires a running `MariaDB` server. To start your own, please run the following
+
+```bash
+sudo docker-compose up
+```
+Tests run on `H2DB` which doesn't require any database containers running.
+## Usage
+To build the application
+```bash
+./gradlew build
+```
+To run tests
+```bash
+./gradlew test
+```
+To run the application on default port `8080` 
+```bash
+./gradlew bootRun
+```
+
+## Endpoints
+All endpoints doesn't require any kind of authorization. Mainly we have 2 controllers `DronesController` and `MedicationsController`
+#### Get available drones
+```bash
+curl --location --request GET 'http://localhost:8080/drones/available'
+```
+
+#### Check drone battery
+```bash
+curl --location --request GET 'http://localhost:8080/drones/:droneUUID/battery'
+```
+
+#### Register a new drone
+```bash
+curl -H "Content-Type: application/json" -X POST \
+    -d '{"serialNumber":<SERIAL_NUMBER>, "weightLimit":<WEIGHT>, "model":<MODEL>}' \
+    'http://localhost:8080/drones/register'
+```
+
+#### Get carried medications by a drone
+```bash
+curl --location --request GET 'http://localhost:8080/medications/drone/:droneUUID'
+```
+
+#### Load medications on a drone
+```bash
+curl -H "Content-Type: application/json" -X POST \
+    -d '{"droneUuid":"<Drone_UUID>", "medications":[{"medicationUuid": <MEDICATION_1_UUID>, "quantity": <MEDICATION_QUANTITY>}, ..., {"medicationUuid": <MEDICATION_N_UUID>, "quantity": <MEDICATION_N_QUANTITY>}]}' \
+    'http://localhost:8080/medications/load'
+```
+
+#### Register a new medication
+```bash
+curl -H "Content-Type: application/json" -X POST \
+    -d '{"name":<MEDICATION_NAME>, "code":<MEDICATION_CODE>, "weight":<MEDICATION_WEIGHT>, "imageUuid":<IMAGE_UUID>"}' \
+    'http://localhost:8080/medications/register'
+```
+
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
