@@ -8,7 +8,7 @@ Feature: Load medications to a specific drone
       | 2 | D2 | D_441_02      | MIDDLE_WEIGHT  | 200          | 21               | LOADING    |
       | 3 | D3 | D_441_03      | MIDDLE_WEIGHT  | 300          | 52               | LOADED     |
       | 4 | D4 | D_441_04      | CRUISER_WEIGHT | 400          | 12               | DELIVERING |
-      | 5 | D5 | D_441_05      | HEAVY_WEIGHT   | 500          | 60               | IDLE  |
+      | 5 | D5 | D_441_05      | HEAVY_WEIGHT   | 500          | 60               | IDLE       |
       | 6 | D6 | D_441_06      | CRUISER_WEIGHT | 350          | 84               | RETURNING  |
     And the following medications are registered
       | # | ID | Name              | Code             | Weight | Image ID |
@@ -60,7 +60,16 @@ Feature: Load medications to a specific drone
     Then an error is returned with status code 404 with a message "Drone not found"
 
 
-  Scenario: 5. Load medications that don't exist
+  Scenario: 5. Load medications to a non-idle drone
+    When user requests to load the following medications on drone "D3"
+      | Medication ID | Quantity |
+      | M1            | 2        |
+      | M2            | 3        |
+      | M3            | 1        |
+    Then an error is returned with status code 400 with a message "Drone not available"
+
+
+  Scenario: 6. Load medications that don't exist
     When user requests to load the following medications on drone "D1"
       | Medication ID | Quantity |
       | M1            | 2        |

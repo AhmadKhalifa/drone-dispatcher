@@ -8,6 +8,7 @@ import com.drone.dispatcher.drone.repository.DroneRepository;
 import com.drone.dispatcher.drone.validator.DroneCanHandleWeightValidator;
 import com.drone.dispatcher.drone.validator.DroneExistsValidator;
 import com.drone.dispatcher.drone.validator.DroneHasEnoughBatteryValidator;
+import com.drone.dispatcher.drone.validator.DroneStateValidator;
 import com.drone.dispatcher.medication.dto.CarriedMedicationDto;
 import com.drone.dispatcher.medication.dto.MedicationCarryRequest;
 import com.drone.dispatcher.medication.mapper.CarriedMedicationMapper;
@@ -32,6 +33,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
     private final DroneExistsValidator droneExistsValidator;
     private final MedicationExistsValidator medicationExistsValidator;
     private final DroneHasEnoughBatteryValidator droneHasEnoughBatteryValidator;
+    private final DroneStateValidator droneStateValidator;
     private final DroneCanHandleWeightValidator droneCanHandleWeightValidator;
     private final CarriedMedicationMapper carriedMedicationMapper;
     private final DroneMapper droneMapper;
@@ -64,6 +66,7 @@ public class LoadDroneWithMedicationsUseCase implements MonoUseCase<MedicationCa
                                 .flatMap(droneCanHandleWeightValidator::validate)
                                 .map(Tuple2::getT2)
                                 .flatMap(droneRepository::findByUuid)
+                                .flatMap(droneStateValidator::validate)
                                 .map(Drone::markAsLoading)
                                 .flatMap(droneRepository::save)
                                 .map(__ -> carriedMedications)
